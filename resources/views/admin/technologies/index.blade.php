@@ -16,7 +16,6 @@
                     <th>Id</th>
                     <th>Nome</th>
                     <th>Slug</th>
-                    <th>Azioni</th>
                 </thead>
                 <tbody>
                     @foreach ($technologies as $technology)

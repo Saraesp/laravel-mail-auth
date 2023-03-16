@@ -14,6 +14,7 @@
             </div>
         </div>
         <div class="col-12">
+            <img src="{{ asset('storage/' .$post->cover_image) }}" alt="{{ $post->title }}" class="w-50">
             <p><strong>Slug:</strong> {{$post->slug}}</p>
             <p><strong>Tipologia:</strong> {{$post->type ? $post->type->name : 'Senza Tipologia'}}</p>
             <p><strong>Tecnologie:</strong> 

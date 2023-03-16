@@ -16,13 +16,20 @@
             </div>
         @endif
         <div class="col-12">
-            <form action="{{route('admin.posts.store')}}" method="POST">
+            <form action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group my-3">
                     <label for="" class="control-label">
                         <strong>Titolo:</strong> 
                     </label>
                     <input type="text" name="title" id="title" class="form-control" placeholder="Titolo">
+                </div>
+                <div class="form-group my-3">
+                    <label class="form-label" for="">Copertina</label>
+                    <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror" >
+                    @error('cover_image')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group my-3">
                     <label for="" class="control-label">
@@ -40,14 +47,8 @@
                        <strong>Tecnologie:</strong> 
                     </label>
                     @foreach($technologies as $technology)
-                    <div class="form-check @error('technologies') is-invalid @enderror">
-                        @if($errors->any())
-                        <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies[]" {{ in_array($technology->id, old('technologies', [])) ? 'checked' : ''}}>
-                        <label class="form-check-label" for="">{{ $technology->name }}</label>
-
-                        @else
-                        <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies[]" {{ $post->technologies->contains($technology) ? 'checked' : ''}}>
-                        @endif
+                    <div class="form-check @error('technologies') is-invalid @enderror">        
+                        <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies">
                         <label class="form-check-label" for="">{{ $technology->name }}</label>
                     </div>
                     @endforeach
