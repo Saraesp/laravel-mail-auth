@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use Illuminate\Support\Facades\Storage;
+use App\Mail\NewContact;
 
 use App\Models\Post;
 use App\Models\Type;
+use App\Models\Lead;
 use App\Models\Technology;
 
 class PostController extends Controller
@@ -68,6 +71,15 @@ class PostController extends Controller
         if($request->has('technologies')){
             $newPost->technologies()->attach($request->technologies);
         }
+
+        $new_lead = new Lead();
+        $new_lead->title = $form_data['title'];
+        $new_lead->content = $form_data['content'];
+        $new_lead->slug = $form_data['slug'];
+
+        $new_lead->save();
+
+        Mail::to('info@boolpress.com')->send(new Contact($new_lead));
 
         return redirect()->route('admin.posts.index')->with('message', 'Post creato corretamente');
     }

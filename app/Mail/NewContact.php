@@ -20,7 +20,7 @@ class NewContact extends Mailable
      */
     public function __construct()
     {
-        //
+      //
     }
 
     /**
@@ -30,8 +30,9 @@ class NewContact extends Mailable
      */
     public function envelope()
     {
-        return new Envelope(
-            subject: 'New Contact',
+        return new Envelope( 
+            replyTo: 'info@boolpress.com',
+            subject: 'Nuovo post inserito',
         );
     }
 
@@ -43,7 +44,7 @@ class NewContact extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.new_post_added',
         );
     }
 
