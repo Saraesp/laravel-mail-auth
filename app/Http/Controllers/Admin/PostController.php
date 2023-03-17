@@ -79,7 +79,7 @@ class PostController extends Controller
 
         $new_lead->save();
 
-        Mail::to('info@boolpress.com')->send(new Contact($new_lead));
+        Mail::to('info@boolpress.com')->send(new NewContact($new_lead));
 
         return redirect()->route('admin.posts.index')->with('message', 'Post creato corretamente');
     }
@@ -149,6 +149,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->technologies()->sync([]);
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('message', $post->title.' è stato cancellato correttamente');

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
+            $table->foreign('post_id')->references('id')->on('posts');
 
             $table->unsignedBigInteger('technology_id');
-            $table->foreign('technology_id')->references('id')->on('technologies')->cascadeOnDelete();
+            $table->foreign('technology_id')->references('id')->on('technologies');
 
             $table->timestamps();
         });

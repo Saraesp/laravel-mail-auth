@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lead', function (Blueprint $table) {
+        Schema::create('leads', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 150)->unique;
-            $table->text('content')->nullable;
+            $table->string('title', 150)->unique();
+            $table->text('content')->nullable();
             $table->string('slug');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lead');
+        Schema::dropIfExists('leads');
     }
 };
